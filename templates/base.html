@@ -1,9 +1,26 @@
-<h1>Menu Principal</h1>
-    <ul>
-        <li><a href="/index"> Inicio </a>  </li>
-        <li><a href="/sobrenosotros"> Sobre Nosotros </a></li>
-    </ul>
-<hr>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Taller Apps</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="navbar">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        Taller Apps
+      </div>
 
-{% block contenido %}
-{% endblock %}
+      <div class="navlinks">
+        <a href="/index">Inicio</a>
+        <a href="/sobrenosotros">Crear tarea</a>
+        <a href="/tareas">Ver tareas</a>
+      </div>
+    </div>
+
+    {% block contenido %}{% endblock %}
+  </div>
+</body>
+</html>

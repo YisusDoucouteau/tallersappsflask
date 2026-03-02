@@ -1,23 +1,32 @@
-{% extends  "base.html" %}
-
+{% extends "base.html" %}
 {% block contenido %}
 
-<h2>Taller Apps - Sobre nosotros</h2>
-<h4>Bienvenido a este sitio de taller .....</h4>
-<form action="/sobrenosotros" method="post">
-    {{ form.csrf_token() }}
-    {{ form.titulo.label }}
-    {{ form.titulo }}
-    {{ form.enviar }}
-</form>
-{% if titulo %}
-    <h2>{{ titulo }}</h2>
-{% endif %}
+<div class="card">
+  <h2>Crear tarea</h2>
+  <p>Escribe el título y guárdalo en la base de datos.</p>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, msg in messages %}
+        <div class="flash {{ 'danger' if category == 'danger' else '' }}">{{ msg }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form method="post">
+    {{ form.hidden_tag() }}
+
+    <div class="form-row">
+      {{ form.titulo.label }}
+      {{ form.titulo(class_="") }}
+      {% for error in form.titulo.errors %}
+        <small class="badge">{{ error }}</small>
+      {% endfor %}
+    </div>
+
+    {{ form.enviar(class_="btn") }}
+    <a class="btn" href="/tareas">Ver tareas</a>
+  </form>
+</div>
 
 {% endblock %}
-<h3>Lista de Tareas</h3>
-<ul>
-    {% for tarea in tareas %}
-        <li>{{ tarea.titulo }}</li>
-    {% endfor %}
-</ul>
